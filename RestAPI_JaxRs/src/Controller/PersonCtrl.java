@@ -5,41 +5,29 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import DAO.PersonDAO;
 import Model.Person;
 
-@Path("/rest")
+@Path("/a")
 public class PersonCtrl {
 	
-	Person p;
+	Person p = new Person();
 	PersonDAO personDAO = new PersonDAO();
 	
-
-	@Path("{id}")
 	@GET
-	@Produces("application/json")
-	public Response showuser(@PathParam("id") int id) {
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Person showuser(@PathParam("id") int id) {
 		
-		JSONObject jobj = new JSONObject();
-		p = personDAO.showUsers(id);
+		//p = personDAO.showUsers(id);
 		
-		try {
-			
-			jobj.put("id", p.getId());
-			jobj.put("name", p.getName());
-			
-			
-		} catch (JSONException e) {
-			
-			e.printStackTrace();
-		}
+		p.setName("Akash");
+		p.setId(id);
 		
-		return Response.status(200).entity(jobj).build();
+		return p;
 		
 	}
 	

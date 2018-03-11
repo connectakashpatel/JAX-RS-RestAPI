@@ -15,19 +15,17 @@ public class PersonDAO{
 	public Person showUsers(int id) {
 		
 		Connection c = connect();
-		String sql = "SELECT * FROM person WHERE id=?";
-		PreparedStatement ps;
-		ResultSet rs;
+		String sql = "SELECT name FROM person WHERE id=?";
+		PreparedStatement ps = null;
+		
 		
 		try {
 			
 			ps = c.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 			ps.setInt(1, id);
-			rs = ps.executeQuery();
-			
 			while(rs.next()) {
 				
-				p.setId(rs.getInt(0));
 				p.setName(rs.getString("name"));
 				
 			}
