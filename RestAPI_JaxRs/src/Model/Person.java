@@ -8,6 +8,8 @@ public class Person {
 	
 	// KP Example
 	private double age;
+	
+	private String lastname;
 
 	public double getAge() {
 		return age;
